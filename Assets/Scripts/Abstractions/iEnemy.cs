@@ -4,7 +4,7 @@ namespace TowerDefanse
 {
     public interface iEnemy
     {
-        string NameDefense { get; }
+        string NameEnemy { get; }
         float ShotPower { get; }
         float ShotRange { get; }
         float TimeShots { get; }
