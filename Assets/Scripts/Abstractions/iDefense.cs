@@ -6,10 +6,10 @@ namespace TowerDefanse
     public interface iDefense  //защита
     {
         string NameDefense { get; }
-        float ShotPower { get; }
+        int ShotPower { get; }
         float ShotRange { get; }
         float TimeShots { get; }
-        List<iEnemy> Enemys { get; }
+        List<iEnemy> Enemy { get; }
         Transform TransformDefense { get; }
     }
 }

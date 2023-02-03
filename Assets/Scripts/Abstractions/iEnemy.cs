@@ -9,9 +9,9 @@ namespace TowerDefanse
         float ShotRange { get; }
         float TimeShots { get; }
         float SpeedEnemy { get; }
-        int Hp { get; }
+        int Hp { get; set; }
         Transform TransformEnemy { get; }
-        void Move(Transform target);
+        iCheckpoint Target { get; set; }
     }
 }
 

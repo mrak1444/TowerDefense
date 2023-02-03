@@ -3,15 +3,35 @@ using UnityEngine;
 namespace TowerDefanse
 
 {
-    internal sealed class BulletModel : IAmmunition
+    internal sealed class BulletModel : MonoBehaviour, IAmmunition
     {
-        public Rigidbody BulletInstance { get; }
-        public float TimeToDestroy { get; }
+        [SerializeField] private float _speedBullet = 0.1f;
+        [SerializeField] private float _timeToDestroy = 5f;
 
-        public BulletModel(Rigidbody bulletInstance, float timeToDestroy)
+        private int _shotPower = 1; //сила выстрела
+        private iEnemy _target;
+
+        public GameObject Obj => gameObject;
+        public float SpeedBullet => _speedBullet;
+        public float TimeToDestroy => _timeToDestroy;
+        public int ShotPower { get => _shotPower; set => _shotPower = value; }
+        public iEnemy Target { get => _target; set => _target = value; }
+
+        private void Start()
         {
-            BulletInstance = bulletInstance;
-            TimeToDestroy = timeToDestroy;
+            Destroy(gameObject, _timeToDestroy);
+        }
+
+        private void Update()
+        {
+            var step = SpeedBullet * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, _target.TransformEnemy.position, step);
+
+            if(Vector3.Distance(transform.position, _target.TransformEnemy.position) < 0.1f)
+            {
+                _target.Hp -= _shotPower;
+                Destroy(gameObject);
+            }
         }
     }
 }

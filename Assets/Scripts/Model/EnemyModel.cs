@@ -11,21 +11,45 @@ namespace TowerDefanse
         [SerializeField] private float _shotRange = 2f; //дальность выстрале и дальность нахождения цели
         [SerializeField] private float _timeShots = 1f; //время между выстрелами
         [SerializeField] private float _speedEnemy = 1f; //скороть врага 
-        [SerializeField] private int _hp = 10; //HP
+        [SerializeField] private int _hp = 3; //HP
+
+        private iCheckpoint _target;
+        private bool _move = true;
 
         public string NameEnemy => _nameEnemy; //имя врага
         public float ShotPower => _shotPower; //сила выстрела
         public float ShotRange => _shotRange; //дальность выстрале и дальность нахождения цели
         public float TimeShots => _timeShots; //время между выстрелами
         public float SpeedEnemy => _speedEnemy; //скороть врага 
-        public int Hp => _hp; //HP
+        public int Hp { get => _hp; set => _hp = value; }//HP
         public Transform TransformEnemy => transform;
+        public iCheckpoint Target { get => _target; set => _target = value; }
 
-        public void Move(Transform target)
+        private void Update()
         {
-            var step = _speedEnemy * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-        }  //убрать в контролер
+            if (_move)
+            {
+                var step = _speedEnemy * Time.deltaTime; // calculate distance to move
+                transform.position = Vector3.MoveTowards(transform.position, _target.ThisTarget.position, step);
+            }
+
+            if (Vector3.Distance(transform.position, _target.ThisTarget.position) < 0.1f)
+            {
+                if(_target.NameTarget == "Tower")  //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
+                {
+                    _move = false;
+                }
+                else if(_target.NameTarget == "Checkpoint")
+                {
+                    _target = _target.NextTarget;
+                }
+            }
+
+            if(_hp <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
 

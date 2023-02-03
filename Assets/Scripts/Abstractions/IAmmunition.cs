@@ -4,7 +4,10 @@ namespace TowerDefanse
 {
     internal interface IAmmunition
     {
-        Rigidbody BulletInstance { get; }
+        GameObject Obj { get; }
+        float SpeedBullet { get; }
         float TimeToDestroy { get; }
+        int ShotPower { get; set; }
+        iEnemy Target { get; set; }
     }
 }
