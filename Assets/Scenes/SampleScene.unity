@@ -3139,7 +3139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startFirePosition: {fileID: 1945457890}
   _bullet: {fileID: 4484085233238674399, guid: 720ae25ebe6ed1d45a7320df22d55da4, type: 3}
-  _timeShots: 0.3
+  _timeShots: 1
   _shotPower: 1
 --- !u!4 &252241085
 Transform:
@@ -4903,8 +4903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startFirePosition: {fileID: 578305438}
   _bullet: {fileID: 4484085233238674399, guid: 720ae25ebe6ed1d45a7320df22d55da4, type: 3}
-  _timeShots: 1
-  _shotPower: 2
+  _timeShots: 0.4
+  _shotPower: 1
 --- !u!4 &412582871
 Transform:
   m_ObjectHideFlags: 0
@@ -9280,6 +9280,21 @@ MonoBehaviour:
   - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
   - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
   - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
+  - {fileID: 4876239912207725641, guid: 55a2a0cca68915544bd7ad7d828ccdd1, type: 3}
   _startCheckpoint: {fileID: 1876750666}
   _base: {fileID: 492702243}
 --- !u!4 &690446595
@@ -10356,8 +10371,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startFirePosition: {fileID: 954613971}
   _bullet: {fileID: 4484085233238674399, guid: 720ae25ebe6ed1d45a7320df22d55da4, type: 3}
-  _timeShots: 3
-  _shotPower: 10
+  _timeShots: 0.3
+  _shotPower: 1
 --- !u!4 &751513054
 Transform:
   m_ObjectHideFlags: 0
