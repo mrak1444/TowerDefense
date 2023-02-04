@@ -4,9 +4,10 @@ namespace TowerDefanse
 {
     public interface iCheckpoint
     {
-        Transform ThisTarget { get; }
+        Transform TargetTransform { get; }
         iCheckpoint NextTarget { get; }
         string NameTarget { get; }
+        iTarget itarget { get; }
     }
 }
 

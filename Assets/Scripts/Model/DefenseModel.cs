@@ -8,7 +8,7 @@ namespace TowerDefanse
     {
         [SerializeField] private Transform _startFirePosition;
         [SerializeField] private GameObject _bullet;
-
+        //сделать серриализацию
         private string _nameDefense = "machine gun turret"; //имя башни
         private int _shotPower = 1; //сила выстрела
         private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
