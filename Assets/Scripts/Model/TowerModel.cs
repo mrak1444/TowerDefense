@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace TowerDefanse
 {
-    public class TowerModel : MonoBehaviour, iTower
+    public class TowerModel : MonoBehaviour, iTarget
     {
         [SerializeField] private int _hp = 50;
 
-        public Transform TowerPosition => transform;
-        public int HP { get => _hp; set => _hp = value; }
+        public Transform TargetTransform => transform;
+        public int Hp { get => _hp; set => _hp = value; }
     }
 }
 

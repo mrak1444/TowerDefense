@@ -13,21 +13,17 @@ namespace TowerDefanse
         private int _shotPower = 1; //сила выстрела
         private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
         private float _timeShots = 1f; //время между выстрелами
-        private List<iEnemy> _enemy = null;
+        private List<iTarget> _enemy = null;
         private bool _flag = true;
 
         public string NameDefense => _nameDefense; //имя врага
-        public int ShotPower => _shotPower; //сила выстрела
-        public float ShotRange => _shotRange; //дальность выстрале и дальность нахождения цели
-        public float TimeShots => _timeShots; //время между выстрелами
-        public List<iEnemy> Enemy => _enemy;
         public Transform TransformDefense => transform;
 
         private void FindNearestEnemy()
         {
             for (int i = 0; i < GameData.Enemys.Count; i++)
             {
-                if (Vector3.Distance(transform.position, GameData.Enemys[i].TransformEnemy.position) <= _shotRange)
+                if (Vector3.Distance(transform.position, GameData.Enemys[i].TargetTransform.position) <= _shotRange)
                 {
                     _enemy.Add(GameData.Enemys[i]);
                 }
@@ -35,7 +31,7 @@ namespace TowerDefanse
 
             for (int i = 0; i < _enemy.Count; i++)
             {
-                if (Vector3.Distance(transform.position, _enemy[i].TransformEnemy.position) > _shotRange)
+                if (Vector3.Distance(transform.position, _enemy[i].TargetTransform.position) > _shotRange)
                 {
                     _enemy.Remove(_enemy[i]);
                 }
@@ -46,7 +42,7 @@ namespace TowerDefanse
         {
             if (_enemy.Count > 0)
             {
-                transform.LookAt(_enemy[0].TransformEnemy);
+                transform.LookAt(_enemy[0].TargetTransform);
             }
             else
             {

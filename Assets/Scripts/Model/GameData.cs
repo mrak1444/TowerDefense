@@ -4,9 +4,9 @@ namespace TowerDefanse
 {
     public static class GameData
     {
-        private static List<iEnemy> _enemys = new List<iEnemy>();
+        private static List<iTarget> _enemys = new List<iTarget>();
 
-        public static List<iEnemy> Enemys { get => _enemys; set => _enemys = value; }
+        public static List<iTarget> Enemys { get => _enemys; set => _enemys = value; }
     }
 }
 
