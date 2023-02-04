@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace TowerDefanse
 {
-    public abstract class EnemyModel : MonoBehaviour, iEnemy, iTarget
+    public class EnemyModel : MonoBehaviour, iEnemy, iTarget
     {
         [SerializeField] private string _nameEnemy = "Infantry"; //имя башни
         [SerializeField] private int _shotPower = 1; //сила выстрела
-        [SerializeField] private float _shotRange = 2f; //дальность выстрале и дальность нахождения цели
         [SerializeField] private float _timeShots = 1f; //время между выстрелами
         [SerializeField] private float _speedEnemy = 1f; //скороть врага 
         [SerializeField] private int _hp = 3; //HP
@@ -52,6 +51,10 @@ namespace TowerDefanse
 
         private void Update()
         {
+            //Debug.Log($"fff {Vector3.Distance(transform.position, _tower.TargetTransform.position)}");
+
+            LookAt();
+
             if (_move)
             {
                 var step = _speedEnemy * Time.deltaTime; // calculate distance to move
@@ -64,7 +67,7 @@ namespace TowerDefanse
                 StartCoroutine(Fire()); 
             }
 
-            if (Vector3.Distance(transform.position, _tower.TargetTransform.position) < 2f && _move) //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
+            if (Vector3.Distance(transform.position, _tower.TargetTransform.position) < 6f && _move) //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
             {
                 _move = false;
                 _fire = true;
@@ -77,7 +80,9 @@ namespace TowerDefanse
 
             if(_hp <= 0)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject, 3f);
+                transform.position = new Vector3(100, 100, 100);
+                gameObject.SetActive(false);
             }
         }
     }

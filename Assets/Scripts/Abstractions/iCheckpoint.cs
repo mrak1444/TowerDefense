@@ -6,7 +6,6 @@ namespace TowerDefanse
     {
         Transform ThisTarget { get; }
         iCheckpoint NextTarget { get; }
-        string NameTarget { get; }
     }
 }
 

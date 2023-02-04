@@ -10,22 +10,22 @@ namespace TowerDefanse
 
         private int _shotPower = 1; //сила выстрела
         private iTarget _target;
+        private Transform _targetposition;
 
-        public GameObject Obj => gameObject;
-        public float SpeedBullet => _speedBullet;
-        public float TimeToDestroy => _timeToDestroy;
         public int ShotPower { get => _shotPower; set => _shotPower = value; }
         public iTarget Target { get => _target; set => _target = value; }
 
         private void Start()
         {
             Destroy(gameObject, _timeToDestroy);
+            _targetposition = _target.TargetTransform;
+
         }
 
         private void Update()
         {
-            var step = SpeedBullet * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, _target.TargetTransform.position, step);
+            var step = _speedBullet * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, _targetposition.position, step);
 
             if(Vector3.Distance(transform.position, _target.TargetTransform.position) < 0.1f)
             {

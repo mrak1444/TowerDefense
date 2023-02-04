@@ -4,20 +4,29 @@ using UnityEngine;
 
 namespace TowerDefanse
 {
-    public abstract class DefenseModel : MonoBehaviour, iDefense
+    public class DefenseModel : MonoBehaviour, iDefense
     {
         [SerializeField] private Transform _startFirePosition;
         [SerializeField] private GameObject _bullet;
+        [SerializeField] private float _timeShots = 1f; //время между выстрелами
+        [SerializeField] private int _shotPower = 1; //сила выстрела
 
         private string _nameDefense = "machine gun turret"; //имя башни
-        private int _shotPower = 1; //сила выстрела
+        
         private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
-        private float _timeShots = 1f; //время между выстрелами
-        private List<iTarget> _enemy = null;
+        
+        //private List<iTarget> _enemy = null;
+        private Dictionary<int, iTarget> _enemy = null;
+        private List<int> _numsEnemy = new List<int>();
         private bool _flag = true;
 
         public string NameDefense => _nameDefense; //имя врага
         public Transform TransformDefense => transform;
+
+        private void Start()
+        {
+            _enemy = new Dictionary<int, iTarget>();
+        }
 
         private void FindNearestEnemy()
         {
@@ -25,28 +34,46 @@ namespace TowerDefanse
             {
                 if (Vector3.Distance(transform.position, GameData.Enemys[i].TargetTransform.position) <= _shotRange)
                 {
-                    _enemy.Add(GameData.Enemys[i]);
+                    if (!_enemy.ContainsKey(i))
+                    { 
+                        _enemy.Add(i, GameData.Enemys[i]);
+                        _numsEnemy.Add(i);
+                    }
                 }
             }
 
-            for (int i = 0; i < _enemy.Count; i++)
+            if(_enemy.Count > 0)
             {
-                if (Vector3.Distance(transform.position, _enemy[i].TargetTransform.position) > _shotRange)
+                foreach (var ene in _enemy)
                 {
-                    _enemy.Remove(_enemy[i]);
+                    if (Vector3.Distance(transform.position, ene.Value.TargetTransform.position) > _shotRange)
+                    {
+                        _numsEnemy.Remove(ene.Key);
+                        _enemy.Remove(ene.Key);
+                    }
                 }
+
+                /*for (int i = 0; i < _enemy.Count; i++)
+                {
+                    if (Vector3.Distance(transform.position, _enemy[i].TargetTransform.position) > _shotRange)
+                    {
+                        _enemy.Remove(_enemy[i]);
+                    }
+                }*/
             }
         }
 
         private void LookAt()
         {
+            Debug.Log($"fff {_enemy.Count}");
             if (_enemy.Count > 0)
             {
-                transform.LookAt(_enemy[0].TargetTransform);
+                transform.LookAt(new Vector3(_enemy[_numsEnemy[0]].TargetTransform.position.x, 1.33f, _enemy[_numsEnemy[0]].TargetTransform.position.z), Vector3.up);
             }
             else
             {
-                transform.LookAt(transform.forward);
+                //transform.LookAt(transform.forward);
+                transform.rotation = Quaternion.identity;
             }
 
         }
@@ -57,7 +84,7 @@ namespace TowerDefanse
             {
                 var bullet = Instantiate(_bullet, _startFirePosition.position, transform.rotation).GetComponent<IAmmunition>();  //откорректировать
                 bullet.ShotPower = _shotPower;
-                bullet.Target = _enemy[0];
+                bullet.Target = _enemy[_numsEnemy[0]];
                 yield return new WaitForSeconds(_timeShots);
             }
 
