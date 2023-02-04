@@ -11,7 +11,8 @@ namespace TowerDefanse
         float SpeedEnemy { get; }
         int Hp { get; set; }
         Transform TransformEnemy { get; }
-        iCheckpoint Target { get; set; }
+        iCheckpoint TargetCheckpoint { get; set; }
+        iTower Tower { get; set; }
     }
 }
 
