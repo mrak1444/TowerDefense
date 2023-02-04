@@ -8,6 +8,6 @@ namespace TowerDefanse
         float SpeedBullet { get; }
         float TimeToDestroy { get; }
         int ShotPower { get; set; }
-        iTarget Target { get; set; }
+        iEnemy Target { get; set; }
     }
 }

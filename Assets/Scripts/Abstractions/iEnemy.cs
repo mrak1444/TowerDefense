@@ -5,10 +5,12 @@ namespace TowerDefanse
     public interface iEnemy
     {
         string NameEnemy { get; }
-        int ShotPower { get; }
+        float ShotPower { get; }
         float ShotRange { get; }
         float TimeShots { get; }
         float SpeedEnemy { get; }
+        int Hp { get; set; }
+        Transform TransformEnemy { get; }
         iCheckpoint Target { get; set; }
     }
 }
