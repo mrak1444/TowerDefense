@@ -18,12 +18,14 @@ namespace TowerDefanse
         private iCheckpoint _targetCheckpoint;
         private bool _move = true;
         private bool _fire = false;
+        private int _numInBase;
 
         public string NameEnemy => _nameEnemy; //имя врага
         public int Hp { get => _hp; set => _hp = value; }//HP
         public Transform TargetTransform => transform;
         public iCheckpoint TargetCheckpoint { get => _targetCheckpoint; set => _targetCheckpoint = value; }
         public iTarget Tower { get => _tower; set => _tower = value; }
+        public int NumInBase { get => _numInBase; set => _numInBase = value; }
 
         private IEnumerator Fire()
         {
@@ -80,7 +82,7 @@ namespace TowerDefanse
 
             if(_hp <= 0)
             {
-                //Destroy(gameObject, 3f);
+                Destroy(gameObject, 3f);
                 transform.position = new Vector3(100, 100, 100);
                 gameObject.SetActive(false);
             }

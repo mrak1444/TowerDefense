@@ -10,10 +10,11 @@ namespace TowerDefanse
         [SerializeField] private GameObject _bullet;
         [SerializeField] private float _timeShots = 1f; //время между выстрелами
         [SerializeField] private int _shotPower = 1; //сила выстрела
+        [SerializeField] private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
 
         private string _nameDefense = "machine gun turret"; //имя башни
         
-        private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
+        
         
         //private List<iTarget> _enemy = null;
         private Dictionary<int, iTarget> _enemy = null;
@@ -51,6 +52,11 @@ namespace TowerDefanse
                         _numsEnemy.Remove(ene.Key);
                         _enemy.Remove(ene.Key);
                     }
+                    if(ene.Value.Hp <= 0)
+                    {
+                        _numsEnemy.Remove(ene.Key);
+                        _enemy.Remove(ene.Key);
+                    }
                 }
 
                 /*for (int i = 0; i < _enemy.Count; i++)
@@ -65,7 +71,6 @@ namespace TowerDefanse
 
         private void LookAt()
         {
-            Debug.Log($"fff {_enemy.Count}");
             if (_enemy.Count > 0)
             {
                 transform.LookAt(new Vector3(_enemy[_numsEnemy[0]].TargetTransform.position.x, 1.33f, _enemy[_numsEnemy[0]].TargetTransform.position.z), Vector3.up);
@@ -85,6 +90,7 @@ namespace TowerDefanse
                 var bullet = Instantiate(_bullet, _startFirePosition.position, transform.rotation).GetComponent<IAmmunition>();  //откорректировать
                 bullet.ShotPower = _shotPower;
                 bullet.Target = _enemy[_numsEnemy[0]];
+                
                 yield return new WaitForSeconds(_timeShots);
             }
 

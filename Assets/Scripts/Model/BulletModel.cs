@@ -14,22 +14,30 @@ namespace TowerDefanse
 
         public int ShotPower { get => _shotPower; set => _shotPower = value; }
         public iTarget Target { get => _target; set => _target = value; }
+        public GameObject Obj { get => gameObject; }
 
         private void Start()
         {
             Destroy(gameObject, _timeToDestroy);
-            _targetposition = _target.TargetTransform;
 
+            _targetposition = _target.TargetTransform;
         }
 
         private void Update()
         {
             var step = _speedBullet * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, _targetposition.position, step);
-
-            if(Vector3.Distance(transform.position, _target.TargetTransform.position) < 0.1f)
+            try
             {
-                _target.Hp -= _shotPower;
+                transform.position = Vector3.MoveTowards(transform.position, _targetposition.position, step);
+
+                if (Vector3.Distance(transform.position, _targetposition.position) < 0.1f)
+                {
+                    _target.Hp -= _shotPower;
+                    Destroy(gameObject);
+                }
+            }
+            catch (MissingReferenceException e)
+            {
                 Destroy(gameObject);
             }
         }
