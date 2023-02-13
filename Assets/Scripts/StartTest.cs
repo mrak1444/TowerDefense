@@ -26,6 +26,7 @@ namespace TowerDefanse
 
         private IEnumerator inst(int waveNum)
         {
+            Debug.Log(waveNum+1);
             _flag = false;
 
             for (int i = 0; i < _waves[waveNum].Enemy.Length; i++)

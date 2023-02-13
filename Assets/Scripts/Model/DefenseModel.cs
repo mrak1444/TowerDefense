@@ -51,21 +51,15 @@ namespace TowerDefanse
                     {
                         _numsEnemy.Remove(ene.Key);
                         _enemy.Remove(ene.Key);
+                        return;
                     }
                     if(ene.Value.Hp <= 0)
                     {
                         _numsEnemy.Remove(ene.Key);
                         _enemy.Remove(ene.Key);
+                        return;
                     }
                 }
-
-                /*for (int i = 0; i < _enemy.Count; i++)
-                {
-                    if (Vector3.Distance(transform.position, _enemy[i].TargetTransform.position) > _shotRange)
-                    {
-                        _enemy.Remove(_enemy[i]);
-                    }
-                }*/
             }
         }
 

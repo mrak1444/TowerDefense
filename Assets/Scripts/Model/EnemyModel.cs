@@ -83,7 +83,7 @@ namespace TowerDefanse
             if(_hp <= 0)
             {
                 Destroy(gameObject, 3f);
-                transform.position = new Vector3(100, 100, 100);
+                //transform.position = new Vector3(transform.position.x, -100, transform.position.z);
                 gameObject.SetActive(false);
             }
         }
