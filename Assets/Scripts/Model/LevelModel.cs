@@ -16,6 +16,7 @@ namespace TowerDefanse
         [SerializeField] private GameObject[] _startCheckpoint;
         [SerializeField] private GameObject[] _nextCheckpoint;
         [SerializeField] private GameObject _base;
+        [SerializeField] private int _startMoney;
 
         private int _waveNum = 0;
         private bool _flag = false;
@@ -24,12 +25,16 @@ namespace TowerDefanse
 
         private void Start()
         {
+            GameProfile.WavesAll = _waves.Length;
             StartCoroutine(inst(_waveNum));
+            GameProfile.MoneyInLevel.Value = _startMoney;
         }
 
         private IEnumerator inst(int waveNum)
         {
-            Debug.Log(waveNum + 1);
+            //Debug.Log(waveNum + 1);
+            GameProfile.WaveNow.Value = waveNum + 1;
+
             _flag = false;
 
             for (int i = 0; i < _waves[waveNum].Enemy.Length; i++)

@@ -13,6 +13,7 @@ namespace TowerDefanse
         [SerializeField] private int _hp = 3; //HP
         [SerializeField] private Transform _startFirePosition;
         [SerializeField] private GameObject _bullet;
+        [SerializeField] private int _priceKill;
 
         private iTarget _tower;
         private iCheckpoint _targetCheckpoint;
@@ -82,6 +83,7 @@ namespace TowerDefanse
 
             if(_hp <= 0)
             {
+                GameProfile.MoneyInLevel.Value += _priceKill;
                 Destroy(gameObject, 3f);
                 //transform.position = new Vector3(transform.position.x, -100, transform.position.z);
                 gameObject.SetActive(false);

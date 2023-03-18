@@ -4,29 +4,40 @@ using UnityEngine;
 
 namespace TowerDefanse
 {
-    public class DefenseModel : MonoBehaviour, iDefense
+    public class DefenseModel : MonoBehaviour, iDefense, iSelectable
     {
+        [SerializeField] private string _nameDefense = "MachineGunTurret"; //имя башни
         [SerializeField] private Transform _startFirePosition;
         [SerializeField] private GameObject _bullet;
         [SerializeField] private float _timeShots = 1f; //время между выстрелами
         [SerializeField] private int _shotPower = 1; //сила выстрела
         [SerializeField] private float _shotRange = 5f; //дальность выстрале и дальность нахождения цели
 
-        private string _nameDefense = "machine gun turret"; //имя башни
-        
-        
-        
+
+        public int PriceInstantiate = 100;
+
+        private bool _enableClick = true;
+
+
+
         //private List<iTarget> _enemy = null;
         private Dictionary<int, iTarget> _enemy = null;
         private List<int> _numsEnemy = new List<int>();
         private bool _flag = true;
+        private iSelectable _selec;
 
         public string NameDefense => _nameDefense; //имя врага
         public Transform TransformDefense => transform;
 
+        public bool EnableClick { get => _enableClick; set => _enableClick = value; }
+        public Transform Position => transform;
+        public string Name => _nameDefense;
+        public GameObject Obj => gameObject;
+
         private void Start()
         {
             _enemy = new Dictionary<int, iTarget>();
+            _selec = GetComponent<iSelectable>();
         }
 
         private void FindNearestEnemy()
@@ -104,6 +115,11 @@ namespace TowerDefanse
                 _flag = false;
                 StartCoroutine(Fire());
             }
+        }
+
+        public iSelectable Selected()
+        {
+            return _selec;
         }
     }
 }
