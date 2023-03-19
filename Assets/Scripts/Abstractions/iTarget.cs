@@ -5,6 +5,7 @@ namespace TowerDefanse
 {
     public interface iTarget
     {
+        GameObject GameObject { get; }
         Transform TargetTransform { get; }
         int Hp { get; set; }
     }

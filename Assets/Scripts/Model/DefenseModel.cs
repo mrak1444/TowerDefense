@@ -42,13 +42,13 @@ namespace TowerDefanse
 
         private void FindNearestEnemy()
         {
-            for (int i = 0; i < GameData.Enemys.Count; i++)
+            for (int i = 0; i < GameProfile.Enemys.Count; i++)
             {
-                if (Vector3.Distance(transform.position, GameData.Enemys[i].TargetTransform.position) <= _shotRange)
+                if (Vector3.Distance(transform.position, GameProfile.Enemys[i].TargetTransform.position) <= _shotRange)
                 {
                     if (!_enemy.ContainsKey(i))
                     { 
-                        _enemy.Add(i, GameData.Enemys[i]);
+                        _enemy.Add(i, GameProfile.Enemys[i]);
                         _numsEnemy.Add(i);
                     }
                 }

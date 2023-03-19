@@ -26,8 +26,21 @@ namespace TowerDefanse
         private void Start()
         {
             GameProfile.WavesAll = _waves.Length;
-            StartCoroutine(inst(_waveNum));
+            if(!GameProfile.GameOver || !GameProfile.LevelWin) StartCoroutine(RunInst(_waveNum));
+            
+            StartCoroutine(AddMeney());
+        }
+
+        private IEnumerator AddMeney()
+        {
+            yield return new WaitForSeconds(0.05f);
             GameProfile.MoneyInLevel.Value = _startMoney;
+        }
+
+        private IEnumerator RunInst(int waveNum)
+        {
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(inst(waveNum));
         }
 
         private IEnumerator inst(int waveNum)
@@ -42,7 +55,7 @@ namespace TowerDefanse
                 var a = Instantiate(_waves[waveNum].Enemy[i], _startCheckpoint[_wayStartNum].transform.position, Quaternion.identity).GetComponent<iEnemy>();
                 a.TargetCheckpoint = _nextCheckpoint[_wayNextNum].GetComponent<iCheckpoint>();
                 a.Tower = _base.GetComponent<iTarget>();
-                GameData.Enemys.Add((iTarget)a);
+                GameProfile.Enemys.Add((iTarget)a);
 
                 _wayStartNum++;
                 _wayNextNum++;
@@ -58,17 +71,22 @@ namespace TowerDefanse
 
         private void Update()
         {
-            if (GameData.Enemys.Count <= 0 && _flag)
+            if (GameProfile.Enemys.Count <= 0 && _flag)
             {
-                if ((_waveNum) < _waves.Length)
+                if (_waveNum < _waves.Length)
                 {
                     StartCoroutine(inst(_waveNum));
                 }
+                else if (_waveNum >= _waves.Length)
+                {
+                    Debug.Log("Win!");
+                    GameProfile.LevelWin = true;
+                }
             }
 
-            for (int i = 0; i < GameData.Enemys.Count; i++)
+            for (int i = 0; i < GameProfile.Enemys.Count; i++)
             {
-                if (GameData.Enemys[i].Hp <= 0) GameData.Enemys.RemoveAt(i);
+                if (GameProfile.Enemys[i].Hp <= 0) GameProfile.Enemys.RemoveAt(i);
             }
         }
     }

@@ -10,13 +10,16 @@ namespace TowerDefanse
 
         public Transform TargetTransform => transform;
         public int Hp { get => _hp; set => _hp = value; }
+        public GameObject GameObject => gameObject;
 
         private void Update()
         {
             if (_hp <= 0)
             {
-                //Destroy(gameObject, 1f);
-                transform.position = new Vector3(100, 100, 100);
+                GameProfile.GameOver = true;
+                Debug.Log("GameOver!");
+                Destroy(gameObject, 1f);
+                //transform.position = new Vector3(100, 100, 100);
                 gameObject.SetActive(false);
             }
         }

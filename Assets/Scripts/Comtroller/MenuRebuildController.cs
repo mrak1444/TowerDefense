@@ -31,7 +31,7 @@ namespace TowerDefanse
         {
             GameProfile.MoneyInLevel.Value -= _obj.PriceInstantiate;
             Destroy(GameProfile.SelectedMenu.Obj);
-            Instantiate(_tower, GameProfile.MenuPosition, Quaternion.identity);
+            GameProfile.DefenseObj.Add(Instantiate(_tower, GameProfile.MenuPosition, Quaternion.identity));
             GameProfile.SelectedMenu.EnableClick = false;
             yield return new WaitForSeconds(0.1f);
             GameProfile.FlagFindSelect.Value = false;

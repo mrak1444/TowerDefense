@@ -21,6 +21,7 @@ namespace TowerDefanse
         private bool _fire = false;
         private int _numInBase;
 
+        public GameObject GameObject => gameObject;
         public string NameEnemy => _nameEnemy; //имя врага
         public int Hp { get => _hp; set => _hp = value; }//HP
         public Transform TargetTransform => transform;
@@ -48,12 +49,38 @@ namespace TowerDefanse
             }
             else
             {
-                transform.LookAt(_tower.TargetTransform);
+                /*try
+                {
+                    transform.LookAt(_tower.TargetTransform);
+                }
+                catch (MissingReferenceException e)
+                {
+                    transform.rotation = Quaternion.identity;
+                }*/
+
+                if (_tower != null)
+                {
+                    transform.LookAt(_tower.TargetTransform);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.identity;
+                }
             }
         }
 
         private void Update()
         {
+            try
+            {
+                var a = _tower.TargetTransform;
+            }
+            catch  //MissingReferenceException e
+            {
+                _tower = null;
+            }
+
+
             //Debug.Log($"fff {Vector3.Distance(transform.position, _tower.TargetTransform.position)}");
 
             LookAt();
@@ -70,12 +97,30 @@ namespace TowerDefanse
                 StartCoroutine(Fire()); 
             }
 
-            if (Vector3.Distance(transform.position, _tower.TargetTransform.position) < 6f && _move) //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
+            /*try
+            {
+                if (Vector3.Distance(transform.position, _tower.TargetTransform.position) < 6f && _move) //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
+                {
+                    _move = false;
+                    _fire = true;
+                }
+            }
+            catch (MissingReferenceException e)
             {
                 _move = false;
-                _fire = true;
-            }
+                _fire = false;
+                _tower = null;
+            }*/
 
+            if(_tower != null)
+            {
+                if (Vector3.Distance(transform.position, _tower.TargetTransform.position) < 6f && _move) //дописать, реализовать главную башню, сделать выстрелы по гл башне, отнимание жизней у башни
+                {
+                    _move = false;
+                    _fire = true;
+                }
+            }
+            
             if (Vector3.Distance(transform.position, _targetCheckpoint.ThisTarget.position) < 0.1f && _move)
             {
                 _targetCheckpoint = _targetCheckpoint.NextTarget;

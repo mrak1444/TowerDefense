@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TowerDefanse
 {
-    public class BaseMenuModel : MonoBehaviour
+    public class BaseMenuController : MonoBehaviour
     {
         [SerializeField] private TMP_Text _money;
         [SerializeField] private TMP_Text _wave;
