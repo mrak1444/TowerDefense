@@ -45,7 +45,6 @@ namespace TowerDefanse
 
         private IEnumerator inst(int waveNum)
         {
-            //Debug.Log(waveNum + 1);
             GameProfile.WaveNow.Value = waveNum + 1;
 
             _flag = false;
@@ -79,7 +78,6 @@ namespace TowerDefanse
                 }
                 else if (_waveNum >= _waves.Length)
                 {
-                    Debug.Log("Win!");
                     GameProfile.LevelWin = true;
                 }
             }

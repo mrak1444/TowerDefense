@@ -23,13 +23,13 @@ namespace TowerDefanse
         private void WinBut()
         {
             GameProfile.LevelWin = false;
-            Destroy(GameProfile.LevelObj, 1);
+            Destroy(GameProfile.LevelObj);
 
             if (GameProfile.DefenseObj.Count > 0)
             {
                 for (int i = 0; i < GameProfile.DefenseObj.Count; i++)
                 {
-                    Destroy(GameProfile.DefenseObj[i], 1);
+                    Destroy(GameProfile.DefenseObj[i]);
                 }
                 GameProfile.DefenseObj.Clear();
             }
@@ -38,7 +38,7 @@ namespace TowerDefanse
             {
                 for (int i = 0; i < GameProfile.Enemys.Count; i++)
                 {
-                    Destroy(GameProfile.Enemys[i].GameObject, 1);
+                    Destroy(GameProfile.Enemys[i].GameObject);
                 }
             }
 
@@ -49,13 +49,13 @@ namespace TowerDefanse
         private void GameOverBut()
         {
             GameProfile.GameOver = false;
-            Destroy(GameProfile.LevelObj, 1);
+            Destroy(GameProfile.LevelObj);
 
             if(GameProfile.DefenseObj.Count > 0)
             {
                 for (int i = 0; i < GameProfile.DefenseObj.Count; i++)
                 {
-                    Destroy(GameProfile.DefenseObj[i], 1);
+                    Destroy(GameProfile.DefenseObj[i]);
                 }
                 GameProfile.DefenseObj.Clear();
             }
@@ -64,7 +64,7 @@ namespace TowerDefanse
             {
                 for (int i = 0; i < GameProfile.Enemys.Count; i++)
                 {
-                    Destroy(GameProfile.Enemys[i].GameObject, 1);
+                    Destroy(GameProfile.Enemys[i].GameObject);
                 }
             }
 

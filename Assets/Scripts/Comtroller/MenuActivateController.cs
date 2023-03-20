@@ -18,6 +18,11 @@ namespace TowerDefanse
             GameProfile.FlagFindSelect.SubscribeOnChange(MenuActive);
         }
 
+        private void OnDestroy()
+        {
+            GameProfile.FlagFindSelect.UnSubscriptionOnChange(MenuActive);
+        }
+
         private void MenuActive(bool obj)
         {
             switch (GameProfile.MenuName)

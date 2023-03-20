@@ -20,6 +20,7 @@ namespace TowerDefanse
         private bool _move = true;
         private bool _fire = false;
         private int _numInBase;
+        private Transform _transform;
 
         public GameObject GameObject => gameObject;
         public string NameEnemy => _nameEnemy; //имя врага
@@ -45,19 +46,10 @@ namespace TowerDefanse
         {
             if (_move)
             {
-                transform.LookAt(_targetCheckpoint.ThisTarget);
+                transform.LookAt(_transform);
             }
             else
             {
-                /*try
-                {
-                    transform.LookAt(_tower.TargetTransform);
-                }
-                catch (MissingReferenceException e)
-                {
-                    transform.rotation = Quaternion.identity;
-                }*/
-
                 if (_tower != null)
                 {
                     transform.LookAt(_tower.TargetTransform);
@@ -78,6 +70,15 @@ namespace TowerDefanse
             catch  //MissingReferenceException e
             {
                 _tower = null;
+            }
+
+            try
+            {
+                _transform = _targetCheckpoint.ThisTarget;
+            }
+            catch
+            {
+
             }
 
 

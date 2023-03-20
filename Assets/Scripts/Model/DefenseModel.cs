@@ -25,6 +25,7 @@ namespace TowerDefanse
         private List<int> _numsEnemy = new List<int>();
         private bool _flag = true;
         private iSelectable _selec;
+        private Vector3 _lookAtVector;
 
         public string NameDefense => _nameDefense; //имя врага
         public Transform TransformDefense => transform;
@@ -76,16 +77,16 @@ namespace TowerDefanse
 
         private void LookAt()
         {
-            if (_enemy.Count > 0)
+            /*if (_enemy.Count > 0)
             {
-                transform.LookAt(new Vector3(_enemy[_numsEnemy[0]].TargetTransform.position.x, 1.33f, _enemy[_numsEnemy[0]].TargetTransform.position.z), Vector3.up);
+                transform.LookAt(_lookAtVector, Vector3.up);
             }
             else
             {
                 //transform.LookAt(transform.forward);
                 transform.rotation = Quaternion.identity;
-            }
-
+            }*/
+            transform.LookAt(_lookAtVector, Vector3.up);
         }
 
         private IEnumerator Fire()
@@ -106,6 +107,11 @@ namespace TowerDefanse
 
         private void Update()
         {
+            if (_enemy.Count > 0)
+            {
+                _lookAtVector = new Vector3(_enemy[_numsEnemy[0]].TargetTransform.position.x, 1.33f, _enemy[_numsEnemy[0]].TargetTransform.position.z);
+            }
+                
             FindNearestEnemy();
 
             LookAt();

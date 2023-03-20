@@ -17,7 +17,6 @@ namespace TowerDefanse
             if (_hp <= 0)
             {
                 GameProfile.GameOver = true;
-                Debug.Log("GameOver!");
                 Destroy(gameObject, 1f);
                 //transform.position = new Vector3(100, 100, 100);
                 gameObject.SetActive(false);
